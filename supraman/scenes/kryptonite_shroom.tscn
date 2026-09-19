@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cqi8al6yxv2wp"]
+
+[ext_resource type="Texture2D" uid="uid://ctvu5mexsdiod" path="res://assets/images/enemy/Mushroom-Run.png" id="1_7ids4"]
+[ext_resource type="Script" uid="uid://1male128xauj" path="res://scripts/kryptonite_shroom.gd" id="1_qw5rd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qw5rd"]
+atlas = ExtResource("1_7ids4")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ai4m3"]
+atlas = ExtResource("1_7ids4")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmqel"]
+atlas = ExtResource("1_7ids4")
+region = Rect2(160, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wil0d"]
+atlas = ExtResource("1_7ids4")
+region = Rect2(240, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cuq2"]
+atlas = ExtResource("1_7ids4")
+region = Rect2(320, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw6wx"]
+atlas = ExtResource("1_7ids4")
+region = Rect2(400, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nffsn"]
+atlas = ExtResource("1_7ids4")
+region = Rect2(480, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5i8mi"]
+atlas = ExtResource("1_7ids4")
+region = Rect2(560, 0, 80, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jkxqo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qw5rd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai4m3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmqel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wil0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cuq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw6wx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nffsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5i8mi")
+}],
+"loop": 1,
+"name": &"running",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2j3ao"]
+size = Vector2(15, 16.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jkxqo"]
+radius = 14.008925
+
+[node name="kryptonite shroom" type="Area2D" unique_id=706729839]
+scale = Vector2(3, 3)
+script = ExtResource("1_qw5rd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=963962992]
+texture_filter = 1
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_jkxqo")
+animation = &"running"
+autoplay = "running"
+frame = 7
+frame_progress = 0.9789493
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128629346]
+position = Vector2(-0.5, 23.75)
+shape = SubResource("RectangleShape2D_2j3ao")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1781909066]
+position = Vector2(-1, 14)
+shape = SubResource("CircleShape2D_jkxqo")
+
+[node name="Timer" type="Timer" parent="." unique_id=923489040]
+wait_time = 2.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
